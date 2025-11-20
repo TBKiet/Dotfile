@@ -1,0 +1,8 @@
+2025-11-07 20:52:22,843 DEBUG    root            Loaded Command Group: ['gcloud', 'config']
+2025-11-07 20:52:22,845 DEBUG    root            Loaded Command Group: ['gcloud', 'config', 'configurations']
+2025-11-07 20:52:22,846 DEBUG    root            Loaded Command Group: ['gcloud', 'config', 'configurations', 'describe']
+2025-11-07 20:52:22,847 DEBUG    root            Running [gcloud.config.configurations.describe] with arguments: [--format: "value[separator=""](properties.core.account,properties.core.project)", CONFIGURATION_NAME: "default"]
+2025-11-07 20:52:22,849 DEBUG    root            Chosen display Format:default value[separator=""](properties.core.account,properties.core.project)
+2025-11-07 20:52:22,849 INFO     root            Display format: "default value[separator=""](properties.core.account,properties.core.project)"
+2025-11-07 20:52:22,860 INFO     ___FILE_ONLY___ tbkiet22@clc.fitus.edu.vnarboreal-device-441920-n7
+

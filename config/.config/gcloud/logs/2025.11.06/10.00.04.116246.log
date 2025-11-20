@@ -1,0 +1,12 @@
+2025-11-06 10:00:04,126 DEBUG    root            Loaded Command Group: ['gcloud', 'projects']
+2025-11-06 10:00:04,130 DEBUG    root            Loaded Command Group: ['gcloud', 'projects', 'describe']
+2025-11-06 10:00:04,131 DEBUG    root            Running [gcloud.projects.describe] with arguments: [--account: "tbkiet22@clc.fitus.edu.vn", --configuration: "default", --format: "value(name)", PROJECT_ID_OR_NUMBER: "arboreal-device-441920-n7"]
+2025-11-06 10:00:04,142 DEBUG    google.auth.transport.requests Making request: POST https://oauth2.googleapis.com/token
+2025-11-06 10:00:04,153 DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-11-06 10:00:04,351 DEBUG    urllib3.connectionpool https://oauth2.googleapis.com:443 "POST /token HTTP/11" 200 None
+2025-11-06 10:00:04,413 DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): cloudresourcemanager.googleapis.com:443
+2025-11-06 10:00:05,681 DEBUG    urllib3.connectionpool https://cloudresourcemanager.googleapis.com:443 "GET /v1/projects/arboreal-device-441920-n7?alt=json HTTP/11" 200 None
+2025-11-06 10:00:06,070 DEBUG    root            Chosen display Format:default value(name)
+2025-11-06 10:00:06,071 INFO     root            Display format: "default value(name)"
+2025-11-06 10:00:06,088 INFO     ___FILE_ONLY___ My First Project
+

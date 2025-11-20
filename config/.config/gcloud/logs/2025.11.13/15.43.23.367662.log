@@ -1,0 +1,9 @@
+2025-11-13 15:43:23,376 DEBUG    root            Loaded Command Group: ['gcloud', 'projects']
+2025-11-13 15:43:23,380 DEBUG    root            Loaded Command Group: ['gcloud', 'projects', 'describe']
+2025-11-13 15:43:23,381 DEBUG    root            Running [gcloud.projects.describe] with arguments: [--account: "tbkiet22@clc.fitus.edu.vn", --configuration: "default", --format: "value(name)", PROJECT_ID_OR_NUMBER: "arboreal-device-441920-n7"]
+2025-11-13 15:43:23,401 DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): cloudresourcemanager.googleapis.com:443
+2025-11-13 15:43:24,619 DEBUG    urllib3.connectionpool https://cloudresourcemanager.googleapis.com:443 "GET /v1/projects/arboreal-device-441920-n7?alt=json HTTP/11" 200 None
+2025-11-13 15:43:24,621 DEBUG    root            Chosen display Format:default value(name)
+2025-11-13 15:43:24,621 INFO     root            Display format: "default value(name)"
+2025-11-13 15:43:24,633 INFO     ___FILE_ONLY___ My First Project
+
