@@ -1,0 +1,188 @@
+# A simple sketchybar config for aerospace users to get started with
+# Not too different from the base starting config!
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+##### Bar Appearance #####
+# Configuring the general appearance of the bar.
+# These are only some of the options available. For all options see:
+# https://felixkratz.github.io/SketchyBar/config/bar
+# If you are looking for other colors, see the color picker:
+# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+
+sketchybar --bar position=top height=33 blur_radius=30 color=0x40000000
+
+##### Changing Defaults #####
+# We now change some default values, which are applied to all further items.
+# For a full list of all available item properties see:
+# https://felixkratz.github.io/SketchyBar/config/items
+
+default=(
+  padding_left=1
+  padding_right=1
+  icon.font="Hack Nerd Font:Bold:13.0"
+  label.font="Hack Nerd Font:Bold:13.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=2
+  icon.padding_right=2
+  label.padding_left=2
+  label.padding_right=2
+  updates=on
+)
+sketchybar --default "${default[@]}"
+
+##### Adding aeropsace layouts #####
+
+# Add the aerospace_workspace_change event we specified in aerospace.toml
+sketchybar --add event aerospace_workspace_change
+
+FOCUSED_WORKSPACE=$(aerospace list-workspaces --format "%{workspace} %{workspace-is-focused}" | awk '$2=="true"{print $1}')
+export FOCUSED_WORKSPACE
+
+# Add workspaces for all monitors - reversed order to fix display sequence
+# Check number of monitors to handle single vs dual monitor setups
+monitor_count=$(aerospace list-monitors | wc -l)
+
+for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}" | sort -r); do
+  for sid in $(aerospace list-workspaces --monitor "$monitor"); do
+    # Map aerospace monitor ID to correct SketchyBar display ID
+    if [ "$monitor_count" -eq 1 ]; then
+      # Single monitor: always use display 1
+      display_id="1"
+    else
+      # Dual monitor: map correctly
+      if [ "$monitor" = "1" ]; then
+        display_id="2"  # Monitor 1 (LG ULTRAGEAR) -> SketchyBar display 2
+      else
+        display_id="1"  # Monitor 2 (Built-in) -> SketchyBar display 1
+      fi
+    fi
+    sketchybar --add item space.$sid left \
+      --set space.$sid display="$display_id" \
+      --subscribe space.$sid aerospace_workspace_change \
+      --set space.$sid \
+      drawing=on \
+      background.color=0x44ffffff \
+      background.corner_radius=5 \
+      background.drawing=on \
+      background.border_color=0xAAFFFFFF \
+      background.border_width=0 \
+      background.height=18 \
+      icon="$sid" \
+      icon.padding_left=10 \
+      icon.shadow.distance=4 \
+      icon.shadow.color=0xA0000000 \
+      label.font="sketchybar-app-font:Regular:12.0" \
+      label.padding_right=8 \
+      label.padding_left=0 \
+      label.y_offset=-1 \
+      label.shadow.drawing=off \
+      label.shadow.color=0xA0000000 \
+      label.shadow.distance=4 \
+      click_script="aerospace workspace $sid; FOCUSED_WORKSPACE=$sid sketchybar --update" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+  done
+done
+
+# Load Icons on startup for all monitors - also fixed order
+for monitor in $(aerospace list-monitors | awk '{print $1}' | sort -r); do
+  for sid in $(aerospace list-workspaces --monitor "$monitor" --empty no); do
+    apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+
+    sketchybar --set space.$sid drawing=on
+
+    icon_strip=" "
+    if [ "${apps}" != "" ]; then
+      while read -r app; do
+        icon_strip+=" $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
+      done <<<"${apps}"
+    else
+      icon_strip=""
+    fi
+    sketchybar --set space.$sid label="$icon_strip"
+  done
+done
+
+
+#front app
+source "$ITEM_DIR/front_app.sh"
+
+# Add workspace refresher to update icons when apps open/close
+sketchybar --add item workspace_refresher left \
+  --set workspace_refresher update_freq=2 script="$CONFIG_DIR/plugins/update_workspace_icons.sh"
+
+
+##### Adding Right Items #####
+# In the same way as the left items we can add items to the right side.
+# Additional position (e.g. center) are available, see:
+# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+
+# Some items refresh on a fixed cycle, e.g. the clock runs its script once
+# every 10s. Other gititems respond to events they subscribe to, e.g. the
+# volume.sh script is only executed once an actual change in system audio
+# volume is registered. More info about the event system can be found here:
+# https://felixkratz.github.io/SketchyBar/config/events
+
+sketchybar --add item clock right \
+  --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
+  --set clock \
+  background.drawing=on \
+  background.color=0xCC2E3440 \
+  background.height=22 \
+  background.corner_radius=6 \
+  background.padding_left=3 \
+  background.padding_right=0 \
+  background.border_width=0 \
+  icon.color=0xFFFFFFFF \
+  label.color=0xFFFFFFFF \
+  --add item volume right \
+  --set volume script="$PLUGIN_DIR/volume.sh" \
+  --subscribe volume volume_change \
+  --set volume \
+  background.drawing=on \
+  background.color=0xCC5C7EAD \
+  background.height=22 \
+  background.corner_radius=6 \
+  background.padding_left=6 \
+  background.padding_right=6 \
+  background.border_width=0 \
+  icon.color=0xFFFFFFFF \
+  label.color=0xFFFFFFFF \
+  --add item battery right \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+  --set battery \
+  background.drawing=on \
+  background.color=0xCC99C794 \
+  background.height=22 \
+  background.corner_radius=6 \
+  background.padding_left=6 \
+  background.padding_right=6 \
+  background.border_width=0 \
+  icon.color=0xFF000000 \
+  label.color=0xFF000000 \
+  --add item swap e \
+  icon="" \
+  label.font="Hack Nerd Font:Italic:13.0" \
+  icon.color=0x44FFFFFF \
+  label.color=0x44FFFFFF
+  --set swap \
+  background.drawing=on \
+  background.color=0xCCBF616A \
+  background.height=22 \
+  background.corner_radius=6 \
+  background.padding_left=6 \
+  background.padding_right=6 \
+  background.border_width=0 \
+  icon.color=0xFFFFFFFF \
+  label.color=0xFFFFFFFF
+
+sketchybar --add item focused_space right \
+  --set focused_space update_freq=1 script="$PLUGIN_DIR/focused_workspace.sh" \
+  label.font="Hack Nerd Font:Bold:16.0" \
+  label.color=0xFF00FF00
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
+

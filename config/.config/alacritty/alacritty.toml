@@ -1,0 +1,40 @@
+[colors.bright]
+black = "0x4d4d4d"
+blue = "0x0026ff"
+cyan = "0x14ffff"
+green = "0x23fd00"
+magenta = "0xfd28ff"
+red = "0xaa2524"
+white = "0xffffff"
+yellow = "0xfffd00"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x001cd1"
+cyan = "0x0dcdcd"
+green = "0x19cb00"
+magenta = "0xcb1ed1"
+red = "0xcc0403"
+white = "0xe5e5e5"
+yellow = "0xcecb00"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xffffff"
+
+[env]
+TERM = "alacritty"
+
+[window]
+decorations = "Buttonless"
+opacity = 0.7
+
+[font]
+size = 22
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[general]
+live_config_reload = true

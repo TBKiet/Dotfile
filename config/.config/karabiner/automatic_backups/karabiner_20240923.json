@@ -1,0 +1,18 @@
+{
+    "profiles": [
+        {
+            "devices": [
+                {
+                    "identifiers": {
+                        "device_address": "d3-cb-f1-cd-b8-53",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false
+                }
+            ],
+            "name": "Default profile",
+            "selected": true
+        }
+    ]
+}

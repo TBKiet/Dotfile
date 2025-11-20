@@ -1,0 +1,79 @@
+{
+    "profiles": [
+        {
+            "devices": [
+                {
+                    "identifiers": {
+                        "device_address": "d3-cb-f1-cd-b8-53",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false,
+                    "treat_as_built_in_keyboard": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 849,
+                        "vendor_id": 1539
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 850,
+                        "vendor_id": 1539
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "device_address": "dc-8f-88-36-4b-c9",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "device_address": "c4-c9-67-7e-06-89",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "device_address": "e8-80-16-8b-24-73",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "caps_lock" },
+                    "to": [{ "key_code": "left_control" }]
+                },
+                {
+                    "from": { "key_code": "delete_forward" },
+                    "to": [{ "consumer_key_code": "volume_decrement" }]
+                },
+                {
+                    "from": { "key_code": "insert" },
+                    "to": [{ "consumer_key_code": "volume_increment" }]
+                },
+                {
+                    "from": { "key_code": "page_down" },
+                    "to": [{ "key_code": "grave_accent_and_tilde" }]
+                }
+            ]
+        }
+    ]
+}

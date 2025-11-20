@@ -1,0 +1,10 @@
+# Toggle sketchybar
+shift + lalt - space : sketchybar --bar hidden=toggle
+
+
+# open apps
+cmd + alt - return : open -a kitty
+cmd + alt - b : open -a Firefox
+cmd + alt - e : open -a Finder
+cmd + alt - c : open -a Cursor
+ctrl + cmd + alt - 0 : pkill AeroSpace

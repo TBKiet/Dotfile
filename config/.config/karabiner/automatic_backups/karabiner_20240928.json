@@ -1,0 +1,37 @@
+{
+    "profiles": [
+        {
+            "devices": [
+                {
+                    "identifiers": {
+                        "device_address": "d3-cb-f1-cd-b8-53",
+                        "is_keyboard": true,
+                        "is_pointing_device": true
+                    },
+                    "ignore": false,
+                    "treat_as_built_in_keyboard": true
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "caps_lock" },
+                    "to": [{ "key_code": "left_control" }]
+                },
+                {
+                    "from": { "key_code": "delete_forward" },
+                    "to": [{ "consumer_key_code": "volume_decrement" }]
+                },
+                {
+                    "from": { "key_code": "insert" },
+                    "to": [{ "consumer_key_code": "volume_increment" }]
+                },
+                {
+                    "from": { "key_code": "page_down" },
+                    "to": [{ "key_code": "grave_accent_and_tilde" }]
+                }
+            ]
+        }
+    ]
+}
