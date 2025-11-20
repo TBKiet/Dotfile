@@ -44,3 +44,27 @@ desktop.ini
 # Secrets
 .env
 secrets.sh
+
+# Logs
+*.log
+logs/
+
+# Cache
+cache/
+*.cache
+
+# gcloud specific - ignore sensitive data and logs
+config/.config/gcloud/logs/
+config/.config/gcloud/cache/
+config/.config/gcloud/*.db
+config/.config/gcloud/access_tokens.db
+config/.config/gcloud/credentials.db
+config/.config/gcloud/legacy_credentials/
+
+# iTerm2 sockets
+config/.config/iterm2/sockets/
+
+# Application specific caches
+config/.config/*/cache/
+config/.config/*/logs/
+config/.config/*/*.log

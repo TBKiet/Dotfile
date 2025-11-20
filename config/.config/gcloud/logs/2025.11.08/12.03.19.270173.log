@@ -1,4 +1,0 @@
-2025-11-08 12:03:19,277 DEBUG    root            Loaded Command Group: ['gcloud', 'projects']
-2025-11-08 12:03:19,279 DEBUG    root            Loaded Command Group: ['gcloud', 'projects', 'describe']
-2025-11-08 12:03:19,280 DEBUG    root            Running [gcloud.projects.describe] with arguments: [--account: "tbkiet22@clc.fitus.edu.vn", --configuration: "default", --format: "value(name)", PROJECT_ID_OR_NUMBER: "arboreal-device-441920-n7"]
-2025-11-08 12:03:19,296 DEBUG    urllib3.connectionpool Starting new HTTPS connection (1): cloudresourcemanager.googleapis.com:443
