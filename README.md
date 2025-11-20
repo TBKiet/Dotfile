@@ -137,12 +137,37 @@ stow -R <package-name>
 
 ## 🔄 Updating
 
+### Pull updates from remote
+
 ```bash
-cd ~/dotfiles
+cd ~/.dotfiles
 git pull origin main
 
 # Restow packages to update symlinks
 stow -R shell git config
+```
+
+### Sync local changes to dotfiles
+
+When you make changes to your configs, use the sync script to update the dotfiles repo:
+
+```bash
+~/.dotfiles/scripts/sync.sh
+```
+
+This will:
+- Copy all changed configs from `~/.config` to `~/.dotfiles/config/.config/`
+- Copy shell configs (`.zshrc`, `.p10k.zsh`, etc.) to `~/.dotfiles/shell/`
+- Copy git configs to `~/.dotfiles/git/`
+
+Then commit and push:
+
+```bash
+cd ~/.dotfiles
+git status              # Review changes
+git add .
+git commit -m "Update configs"
+git push
 ```
 
 ## 🗑️ Uninstalling
